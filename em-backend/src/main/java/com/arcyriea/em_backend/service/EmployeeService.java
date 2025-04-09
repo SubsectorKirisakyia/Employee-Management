@@ -18,7 +18,9 @@ public class EmployeeService implements IEmployeeService {
     @Override
     public List<Employee> getEmployees() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getEmployees'");
+        List<Employee> employees = employeeRepository.findAll();
+
+        return employees;
     }
 
     @Override

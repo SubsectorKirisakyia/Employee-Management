@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.arcyriea.em_backend.api.model.Employee;
 import com.arcyriea.em_backend.dto.EmployeeDto;
+import com.arcyriea.em_backend.exceptions.ResourceNotFoundException;
 import com.arcyriea.em_backend.repository.EmployeeRepository;
 import com.arcyriea.em_backend.service.interfaces.IEmployeeService;
 import com.mapper.EmployeeMapper;
@@ -27,9 +28,10 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
-    public Employee getEmployee(int id) {
+    public EmployeeDto getEmployee(long id) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getEmployee'");
+        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("The employee with requested id:"+id+" could not be found!!!"));
+        return EmployeeMapper.mapToEmployeeDto(employee);
     }
 
     @Override
@@ -42,7 +44,6 @@ public class EmployeeService implements IEmployeeService {
     public EmployeeDto createEmployee(EmployeeDto dto) {
         Employee employee = EmployeeMapper.mapToEmployee(dto);
         EmployeeDto savedEmployee = EmployeeMapper.mapToEmployeeDto(employeeRepository.save(employee));
-        //Potential issue, need to address throw for null values
         return savedEmployee;
     }
     

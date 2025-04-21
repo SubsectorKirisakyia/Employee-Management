@@ -8,6 +8,6 @@ import com.arcyriea.em_backend.dto.EmployeeDto;
 public interface IEmployeeService {
     List<Employee> getEmployees();
     EmployeeDto getEmployee(long id);
-    Employee getEmployee(String email);
+    EmployeeDto getEmployee(String email);
     EmployeeDto createEmployee(EmployeeDto dto);
 }

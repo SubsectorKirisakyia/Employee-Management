@@ -21,23 +21,20 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public List<Employee> getEmployees() {
-        // TODO Auto-generated method stub
         List<Employee> employees = employeeRepository.findAll();
-
         return employees;
     }
 
     @Override
     public EmployeeDto getEmployee(long id) {
-        // TODO Auto-generated method stub
         Employee employee = employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("The employee with requested id:"+id+" could not be found!!!"));
         return EmployeeMapper.mapToEmployeeDto(employee);
     }
 
     @Override
-    public Employee getEmployee(String email) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getEmployee'");
+    public EmployeeDto getEmployee(String email) {
+        Employee employee = employeeRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("The employee with the following email: "+email+" could not be found!!!"));
+        return EmployeeMapper.mapToEmployeeDto(employee);
     }
 
     @Override

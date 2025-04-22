@@ -1,0 +1,9 @@
+1. Entity layer
+2. Repository layer
+3. DTO & Mapper
+4. Service layer
+5. Create REST controllers and apis
+
+Other things:
+- Apply validation library
+- Create Custom Exception messages extending from RuntimeException

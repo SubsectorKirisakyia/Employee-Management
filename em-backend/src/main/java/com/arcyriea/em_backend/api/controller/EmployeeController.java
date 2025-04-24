@@ -2,7 +2,6 @@ package com.arcyriea.em_backend.api.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.arcyriea.em_backend.api.model.Employee;
 import com.arcyriea.em_backend.dto.EmployeeDto;
 import com.arcyriea.em_backend.service.EmployeeService;
 

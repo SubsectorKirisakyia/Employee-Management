@@ -12,6 +12,6 @@ import com.arcyriea.em_backend.api.model.Employee;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     
-    @Query("SELECT e FROM Employee e WHERE e.email_id = :email")
+    @Query("SELECT e FROM Employee e WHERE e.email = :email")
     Optional<Employee> findByEmail(@Param("email") String email);
 }

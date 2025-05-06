@@ -6,6 +6,7 @@ import './App.css'
 import ListEmployeeComponent from './components/ListEmployeeComponent'
 import HeaderComponent from './components/HeaderComponent'
 import FooterComponent from './components/FooterComponent'
+import EmployeeComponent from './components/EmployeeComponent'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,20 +28,9 @@ function App() {
       <Routes>
         <Route path='/' element={<ListEmployeeComponent/>}></Route>
         <Route path='/employees' element={<ListEmployeeComponent/>}></Route>
+        <Route path='/add-employee' element={<EmployeeComponent/>}></Route>
       </Routes>
-      
       </BrowserRouter>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
       <FooterComponent/>
     </>
   )

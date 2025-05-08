@@ -1,71 +1,44 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { addEmployee, editEmployee, getEmployee } from '../services/EmployeeService';
+import { getEmployee, deleteEmployee } from '../services/EmployeeService';
 
-const EmployeeComponent = () => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-
+const EmployeeDetailComponent = () => {
     const {id} = useParams();
 
-    const [errors, setErrors] = useState({
-        firstName: '',
-        lastName: '',
-        email: ''
-    });
-
-    useEffect(() => {
-        if(id){
-            getEmployee(id).then((response) => {
-                let emp = response.data
-                setFirstName(emp.firstName);
-                setLastName(emp.lastName);
-                setEmail(emp.email);
-            }).catch(error => console.error("Error fetching Employee:", error));
-        }
-    }, [id])
+    const [firstName, fetchFirstName] = useState('');
+    const [lastName, fetchLastName] = useState('');
+    const [email, fetchEmail] = useState('');
 
     const navigator = useNavigate();
-
-    function saveEmployee(e){
-        e.preventDefault();
-
-        const employee = {firstName, lastName, email}
-        if (id){
-            editEmployee(id, employee).then((response) => {
-                console.log(response.data);
-                navigator('/employees');
-            });
-        } else {
-            addEmployee(employee).then((response) => {
-                console.log(response.data);
-                navigator('/employees');
-            });
-        }
-
-        
-    }
+    useEffect(() => {
+        getEmployee(id).then((response) => {
+            fetchFirstName(response.data.firstName);
+            fetchLastName(response.data.lastName);
+            fetchEmail(response.data.email);
+        }).catch(error => {
+            console.error("Error fetching employee: ", error);
+        })
+    }, [id])
 
     function backToIndex(e){
         e.preventDefault();
         navigator('/');
     }
 
-    function validateForm(){
-        let valid = true;
-
-        const errorsCopy = {... errors};
+    function confirmRemove(e){
+        e.preventDefault();
+        deleteEmployee(id).then((response)=>{
+            console.log(response.status);
+            navigator('/');
+        }).catch(error => console.error("Failed to Delete: ", error));
     }
-
-    var title = id ? 'Edit Employee' : 'Add Employee';
 
   return (
     <div className='container'>
         <br/>
         <div className='row'>
             <div className='card col-md-6 offset-md-3 offset-md-3'>
-                <h2 className='text-center'>{title}</h2>
+                <h2 className='text-center'>Delete Employee</h2>
                 <div className='card-body'>
                 <button className='btn btn-secondary text-end' onClick={backToIndex}>Go Back</button>
                     <form>
@@ -102,7 +75,7 @@ const EmployeeComponent = () => {
                             onChange={(e) => setEmail(e.target.value)}
                         />    
                         </div>
-                        <button className='btn btn-success' onClick={saveEmployee}>Submit</button>
+                        <button className='btn btn-danger' onClick={confirmRemove}>Confirm</button>
                     </form>
                 </div>
             </div>
@@ -111,4 +84,4 @@ const EmployeeComponent = () => {
   )
 }
 
-export default EmployeeComponent
+export default EmployeeDetailComponent

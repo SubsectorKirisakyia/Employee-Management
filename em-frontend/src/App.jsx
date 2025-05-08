@@ -7,6 +7,7 @@ import ListEmployeeComponent from './components/ListEmployeeComponent'
 import HeaderComponent from './components/HeaderComponent'
 import FooterComponent from './components/FooterComponent'
 import EmployeeComponent from './components/EmployeeComponent'
+import EmployeeDetailComponent from './components/EmployeeDetailComponent'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,6 +30,8 @@ function App() {
         <Route path='/' element={<ListEmployeeComponent/>}></Route>
         <Route path='/employees' element={<ListEmployeeComponent/>}></Route>
         <Route path='/add-employee' element={<EmployeeComponent/>}></Route>
+        <Route path='/edit-employee/:id' element={<EmployeeComponent/>}/>
+        <Route path='/delete-employee/:id' element={<EmployeeDetailComponent/>}/>
       </Routes>
       </BrowserRouter>
       <FooterComponent/>

@@ -12,10 +12,12 @@ import com.arcyriea.em_backend.repository.EmployeeRepository;
 import com.arcyriea.em_backend.service.interfaces.IEmployeeService;
 import com.mapper.EmployeeMapper;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class EmployeeService implements IEmployeeService {
 
     private final EmployeeRepository employeeRepository;

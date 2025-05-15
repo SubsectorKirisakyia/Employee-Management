@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
+//@Transactional //Only use this to secure "sensitives" and "criticals" operations, as it is known to cause unnecessary overhead for many things not belong to those nature
 public class EmployeeService implements IEmployeeService {
 
     private final EmployeeRepository employeeRepository;
